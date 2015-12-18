@@ -16,6 +16,8 @@ count = 0
 # open urls.txt file and put urls into list
 with open(dir + '/urls.txt') as u: 
 	urls = u.read().splitlines()
+	u.close()
+	
 	total = len(urls)
 	print "Total URLs: " + str(total)
 	
@@ -61,5 +63,5 @@ with open(dir + '/urls.txt') as u:
 	
 		if count < total:
 			time.sleep(pause)
-
+	
 print "Completed URLs: " + str(count)
