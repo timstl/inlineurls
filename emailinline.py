@@ -11,9 +11,13 @@ pause = 10
 # current directory
 dir = os.path.dirname(os.path.realpath(__file__))
 
+count = 0
+
 # open urls.txt file and put urls into list
 with open(dir + '/urls.txt') as u: 
 	urls = u.read().splitlines()
+	total = len(urls)
+	print "Total URLs: " + str(total)
 	
 	for url in urls :	
 		
@@ -43,7 +47,9 @@ with open(dir + '/urls.txt') as u:
 					with open(dir + '/' + filename, 'w') as f:
 						f.write(j['HTML'].encode('utf8'))
 						f.close()
-				
+						count += 1
+						print "Created: #" + str(count) + " " + filename
+						
 				else :
 					print 'Ooops, response 200 not received for: ' + filename
 				
@@ -52,5 +58,8 @@ with open(dir + '/urls.txt') as u:
 			
 		except :
 			print 'Failed: ' + filename
-			
-	time.sleep(pause)
+	
+		if count < total:
+			time.sleep(pause)
+
+print "Completed URLs: " + str(count)
